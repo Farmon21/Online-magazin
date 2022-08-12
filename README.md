@@ -1,0 +1,2 @@
+# Online-magazin
+Python Django
