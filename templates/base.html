@@ -1,0 +1,137 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'course.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'point.css' %}">
+    <link rel="stylesheet" href="{% static 'bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-head">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div  style="position: fixed; background-color: white;  width: 100%;" class="navbar-brand">
+                    <a style="margin-left: 30px;" class="navbar-item" href="{% url 'product_list' %}">
+                        <h1 style="color: green; font-weight:bold; font-size: 40px;">META</h1>
+                    </a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                        data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        
+                    </a>
+                    <div style="margin: 5px 0; " id="navbarBasicExample" class="navbar-menu is-size-5">
+                        <div class="navbar-start">
+                            {% for brand in brands %}
+                            <a href="{% url 'product_list' %}?brand={{ brand.pk }}" class="navbar-item">
+                                {{ brand }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="navbar-end">
+
+                        <!-- Search tizimi -->
+                        <form action="{% url 'product_list' %}" method="get">
+                            <div class="field has-addons mt-4 mr-2">
+                                <div class="control">
+                                    <input class="input" type="search" placeholder="Find a product" name="search">
+                                </div>
+                                <div class="control">
+                                    <button class="button is-info" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Search tizimi tugashi-->
+                        
+    
+    
+                        <a class="navbar-item order" href="{% url 'orders' %}">
+                            <button class="button is-dark">
+                                Orders
+                            </button>
+                        </a>
+
+                        <a class="navbar-item order" href="{% url 'cart' %}">
+                            <button class="button is-success">
+                                   <ion-icon name="cart-outline" class="mr-2 is-size-4"></ion-icon> 
+                                Cart
+                            </button>
+                        </a>
+    
+                        <span class="navbar-item mr-6 ">
+                            <div class="dropdown is-hoverable">
+                                <div class="dropdown-trigger">
+                                    <button class="button is-warning" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <span class="has-text-weight-bold mx-1">{{ user }}</span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="{% url 'edit_profile' %}" class="dropdown-item">
+                                            Edit profile
+                                        </a>
+                                        <a href="{% url 'reset_password' %}" class="dropdown-item">
+                                            Reset password
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a href="{% url 'sign_out' %}" class="dropdown-item">
+                                            Sign out
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+
+
+
+             
+
+            </nav>
+        </div>
+        <div class="hero-body">
+            {% block auth %}
+            {% endblock %}
+
+            {% block slider %}
+            {% endblock %}
+
+            <br><br><br>
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </section>
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+    <script>
+        bulmaCarousel.attach('#carousel-demo', {
+            slidesToScroll: 1,
+            slidesToShow: 1,
+            infinite: true,
+        });
+    </script>
+
+</body>
+
+</html>
